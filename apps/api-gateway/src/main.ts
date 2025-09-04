@@ -35,7 +35,7 @@ const limiter=rateLimit({
   message:{error:"Too many requests,please try again later!"},
   standardHeaders:true,
   legacyHeaders:true,
-  keyGenerator:(req:any)=>req.ip,
+  keyGenerator:(req:any)=>req.clientIp,
 })
 
 app.use(limiter);
@@ -46,7 +46,7 @@ app.get('/gateway-health', (req, res) => {
   res.send({ message: 'Welcome to api-gateway!' });
 });
 
-const port = process.env.PORT || 3333;
+const port = process.env.PORT || 6081;
 const server = app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}/api`);
 });
